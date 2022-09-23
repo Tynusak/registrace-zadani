@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import validator from 'validator';
 import './style.css';
 
 const Registration = () => {
@@ -8,6 +9,16 @@ const Registration = () => {
     password: '',
     passwordConfirm: '',
   });
+
+  const handleUserName = () => {
+    const emailValue = document.querySelector('#email').value;
+    const at = emailValue.indexOf('@');
+    const isEmail = validator.isEmail(emailValue);
+
+    if (isEmail) {
+      document.querySelector('#userName').value = emailValue.slice(0, at);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +38,7 @@ const Registration = () => {
     <form id="registration" onSubmit={handleSubmit}>
       <h1>Registration</h1>
       <label className="field">
-        <input type="text" id="email" />
+        <input type="text" id="email" onChange={handleUserName} />
       </label>
       <label className="field">
         <input type="text" id="userName" />
