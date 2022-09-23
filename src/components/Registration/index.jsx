@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 
 const Registration = () => {
@@ -9,8 +9,22 @@ const Registration = () => {
     passwordConfirm: '',
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setUser({
+      username: document.querySelector('#userName').value,
+      email: document.querySelector('#email').value,
+      password: document.querySelector('#password').value,
+      passwordConfirm: document.querySelector('#confirmation').value,
+    });
+
+    return user;
+  };
+
+  console.log(user);
+
   return (
-    <form id="registration">
+    <form id="registration" onSubmit={handleSubmit}>
       <h1>Registration</h1>
       <label className="field">
         <input type="text" id="email" />
