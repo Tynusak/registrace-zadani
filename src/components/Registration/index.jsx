@@ -35,19 +35,23 @@ const Registration = () => {
   console.log(user);
 
   return (
-    <form id="registration" onSubmit={handleSubmit}>
+    <form className="form" id="registration" onSubmit={handleSubmit}>
       <h1>Registration</h1>
       <label className="field">
+        Email
         <input type="text" id="email" onChange={handleUserName} />
       </label>
       <label className="field">
+        Username
         <input type="text" id="userName" />
       </label>
       <label className="field">
-        <input type="text" id="password" />
+        Password
+        <input type="password" id="password" />
       </label>
       <label className="field">
-        <input type="text" id="confirmation" />
+        Confirm password
+        <input type="password" id="confirmation" />
       </label>
       <button type="submit">Register</button>
     </form>
