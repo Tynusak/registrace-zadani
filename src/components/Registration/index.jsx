@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import validator from 'validator';
 import './style.css';
 
 const Registration = () => {
@@ -10,48 +9,58 @@ const Registration = () => {
     passwordConfirm: '',
   });
 
-  const handleUserName = () => {
-    const emailValue = document.querySelector('#email').value;
-    const at = emailValue.indexOf('@');
-    const isEmail = validator.isEmail(emailValue);
+  const handleEmail = (e) => {
+    const emailInput = e.target.value;
 
-    if (isEmail) {
-      document.querySelector('#userName').value = emailValue.slice(0, at);
+    if (emailInput.includes('@')) {
+      setUser({
+        ...user,
+        email: e.target.value,
+        username: emailInput.slice(0, emailInput.indexOf('@')),
+      });
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUser({
-      username: document.querySelector('#userName').value,
-      email: document.querySelector('#email').value,
-      password: document.querySelector('#password').value,
-      passwordConfirm: document.querySelector('#confirmation').value,
-    });
-
-    return user;
+    console.log(user);
   };
-
-  console.log(user);
 
   return (
     <form className="form" id="registration" onSubmit={handleSubmit}>
       <h1>Registration</h1>
       <label className="field">
         Email
-        <input type="text" id="email" onChange={handleUserName} />
+        <input type="email" id="email" onChange={handleEmail} />
       </label>
       <label className="field">
         Username
-        <input type="text" id="userName" />
+        <input
+          type="text"
+          id="userName"
+          value={user.username}
+          onChange={(e) => setUser({ ...user, username: e.target.value })}
+        />
       </label>
       <label className="field">
         Password
-        <input type="password" id="password" />
+        <input
+          type="password"
+          id="password"
+          value={user.password}
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
+        />
       </label>
       <label className="field">
         Confirm password
-        <input type="password" id="confirmation" />
+        <input
+          type="password"
+          id="confirmation"
+          value={user.passwordConfirm}
+          onChange={(e) =>
+            setUser({ ...user, passwordConfirm: e.target.value })
+          }
+        />
       </label>
       <button type="submit">Register</button>
     </form>
