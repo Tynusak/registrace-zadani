@@ -13,11 +13,15 @@ const Registration = () => {
     const emailInput = e.target.value;
 
     if (emailInput.includes('@')) {
-      setUser({
-        ...user,
-        email: e.target.value,
-        username: emailInput.slice(0, emailInput.indexOf('@')),
-      });
+      if (user.username === '') {
+        setUser({
+          ...user,
+          email: emailInput,
+          username: emailInput.slice(0, emailInput.indexOf('@')),
+        });
+      } else {
+        setUser({ ...user, email: emailInput });
+      }
     }
   };
 
